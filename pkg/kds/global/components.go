@@ -97,7 +97,7 @@ func createZoneIfAbsent(name string, resManager manager.ResourceManager) error {
 	return nil
 }
 
-// ProvidedFilter filter Resources provided by Remote, specifically excludes Dataplanes and Ingresses from 'clusterID' cluster
+// ProvidedFilter filter RcreateZoneIfAbsentesources provided by Remote, specifically excludes Dataplanes and Ingresses from 'clusterID' cluster
 func ProvidedFilter(clusterID string, r model.Resource) bool {
 	if r.GetType() == system.ConfigType && r.GetMeta().GetName() != config_manager.ClusterIdConfigKey {
 		return false
@@ -126,9 +126,14 @@ func Callbacks(s sync_store.ResourceSyncer, k8sStore bool, kubeFactory resources
 					util.AddSuffixToNames(rs.GetItems(), "default")
 				}
 			}
+
+			//if err := r.Store.Get(ctx, owner, store.GetByKey(opts.Mesh, model.NoMesh)); err != nil {
+			//	return MeshNotFound(opts.Mesh)
+			//}
+
 			return s.Sync(rs, sync_store.PrefilterBy(func(r model.Resource) bool {
 				return strings.HasPrefix(r.GetMeta().GetName(), fmt.Sprintf("%s.", clusterName))
-			}))
+			}), sync_store.Zone(nil))
 		},
 	}
 }

@@ -2,6 +2,7 @@ package store
 
 import (
 	"context"
+	"github.com/kumahq/kuma/pkg/core/resources/apis/system"
 	"reflect"
 	"time"
 
@@ -27,6 +28,7 @@ type ResourceSyncer interface {
 
 type SyncOption struct {
 	Predicate func(r model.Resource) bool
+	zone      *system.ZoneResource
 }
 
 type SyncOptionFunc func(*SyncOption)
@@ -42,6 +44,12 @@ func NewSyncOptions(fs ...SyncOptionFunc) *SyncOption {
 func PrefilterBy(predicate func(r model.Resource) bool) SyncOptionFunc {
 	return func(opts *SyncOption) {
 		opts.Predicate = predicate
+	}
+}
+
+func Zone(zone *system.ZoneResource) SyncOptionFunc {
+	return func(opts *SyncOption) {
+		opts.zone = zone
 	}
 }
 
@@ -122,7 +130,7 @@ func (s *syncResourceStore) Sync(upstream model.ResourceList, fs ...SyncOptionFu
 		creationTime := r.GetMeta().GetCreationTime()
 		// some Stores try to cast ResourceMeta to own Store type that's why we have to set meta to nil
 		r.SetMeta(nil)
-		if err := s.resourceStore.Create(ctx, r, store.CreateBy(rk), store.CreatedAt(creationTime), store.CreateSynced()); err != nil {
+		if err := s.resourceStore.Create(ctx, r, store.CreateBy(rk), store.CreateWithOwner(opts.zone), store.CreatedAt(creationTime), store.CreateSynced()); err != nil {
 			return err
 		}
 	}

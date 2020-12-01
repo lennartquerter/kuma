@@ -66,6 +66,9 @@ func (r *resourcesManager) Create(ctx context.Context, resource model.Resource, 
 		}
 	}
 
+	// if this is global and Dataplane or DPInsight
+	// s
+
 	return r.Store.Create(ctx, resource, append(fs, store.CreatedAt(core.Now()), store.CreateWithOwner(owner))...)
 }
 
