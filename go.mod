@@ -24,8 +24,8 @@ require (
 	github.com/gruntwork-io/terratest v0.27.5
 	github.com/hoisie/mustache v0.0.0-20160804235033-6375acf62c69
 	github.com/kelseyhightower/envconfig v1.4.0
-	github.com/kumahq/kuma/api v0.0.0-00010101000000-000000000000
-	github.com/kumahq/kuma/pkg/plugins/resources/k8s/native v0.0.0-00010101000000-000000000000
+	github.com/kumahq/kuma/api v0.0.0-00010101000000-000000000000 // indirect
+	github.com/kumahq/kuma/pkg/plugins/resources/k8s/native v0.0.0-00010101000000-000000000000 // indirect
 	github.com/lib/pq v1.7.0
 	github.com/miekg/dns v1.1.29
 	github.com/onsi/ginkgo v1.14.2
@@ -35,7 +35,7 @@ require (
 	github.com/prometheus/client_golang v1.7.1
 	github.com/prometheus/client_model v0.2.0
 	github.com/prometheus/common v0.10.0
-	github.com/prometheus/prometheus v0.0.0-00010101000000-000000000000
+	github.com/prometheus/prometheus v0.0.0-00010101000000-000000000000 // indirect
 	github.com/sethvargo/go-retry v0.1.0
 	github.com/shurcooL/httpfs v0.0.0-20190707220628-8d4bc4ba7749
 	github.com/slok/go-http-metrics v0.9.0
@@ -49,7 +49,7 @@ require (
 	google.golang.org/genproto v0.0.0-20200526211855-cb27e3aa2013
 	google.golang.org/grpc v1.30.0
 	google.golang.org/protobuf v1.25.0
-	gopkg.in/yaml.v2 v2.3.0
+	gopkg.in/yaml.v2 v2.4.0
 	helm.sh/helm/v3 v3.3.4
 	k8s.io/api v0.18.9
 	k8s.io/apimachinery v0.18.9
